@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.alipay.sofa</groupId>
+    <artifactId>sofaboot-dependencies</artifactId>
+    <version>3.2.1</version>
+  </parent>
+
+  <groupId>com.soft.sakd</groupId>
+  <artifactId>mkweb-end</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <imgscalr-lib>4.2</imgscalr-lib>
+    <junit-jupiter-engine>5.1.0</junit-jupiter-engine>
+    <mockito-all>1.10.19</mockito-all>
+    <commons-lang3.version>3.7</commons-lang3.version>
+    <guava.version>28.1-jre</guava.version>
+    <tracer.version>3.0.11</tracer.version>
+  </properties>
+
+  <modules>
+    <module>app/test</module>
+    <module>app/web/home</module>
+    <module>app/web/files-server</module>
+    <module>app/biz/shared</module>
+    <module>app/biz/service-impl</module>
+    <module>app/common/service</module>
+    <module>app/common/search</module>
+    <module>app/core/model</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.soft.sakd</groupId>
+        <artifactId>common-search</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.soft.sakd</groupId>
+        <artifactId>home</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.soft.sakd</groupId>
+        <artifactId>core-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.soft.sakd</groupId>
+        <artifactId>common-service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.soft.sakd</groupId>
+        <artifactId>biz-service-impl</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.soft.sakd</groupId>
+        <artifactId>biz-shared</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.soft.sakd</groupId>
+        <artifactId>test</artifactId>
+        <version>${project.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- spring boot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Optional, for bootstrapss_all -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.ow2.asm</groupId>
+          <artifactId>asm</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.objenesis</groupId>
+          <artifactId>objenesis</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+    <!--guava-->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+  </dependencies>
+  <licenses>
+    <license>
+      <name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
+      <url>http://www.gnu.org/licenses/lgpl.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <repositories>
+    <!-- 使用阿里 maven 库 -->
+    <repository>
+      <id>ali-maven</id>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>nexus-public-snapshots</id>
+      <url>http://maven.aliyun.com/nexus/content/repositories/snapshots/</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>ali-maven</id>
+      <name>ali Maven Plugin Repository</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>

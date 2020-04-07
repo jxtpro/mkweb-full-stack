@@ -1,0 +1,39 @@
+ArticleMange_updateArticleLike_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: id
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: id
+      objBaseName: Long
+      objClass: java.lang.Long
+      object: 0
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_updateArticleLike_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}

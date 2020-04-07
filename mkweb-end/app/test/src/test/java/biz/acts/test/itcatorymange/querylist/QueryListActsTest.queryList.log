@@ -1,0 +1,7 @@
+=============================Start excuting TestCase caseId:ItCatoryMange_queryList_caseID_001 新增ItCatoryMange_queryList_TemplateCase=================
+{"args":{"argTypes":[]},"depDataSet":{"virtualTables":[]},"description":"新增ItCatoryMange_queryList_TemplateCase","expectDataSet":{"virtualTables":[]},"expectEventSet":{"virtualEventObjects":[]},"expectException":{},"expectResult":{"result":{"flags":{}},"virtualObject":{"$ref":"$.expectResult.result"}},"virtualParams":{"params":{}}}
+====================Cleaning up DB data preparations=============================
+Preparing DB data:
+Start to invoke method:queryList parameters:
+Invocation result: {"list":[{"id":1,"name":"java"},{"id":2,"name":"react"},{"id":3,"name":"antd"},{"id":4,"name":"k8s"}],"status":true,"totalCount":0}
+====================Cleaning up DB data preparations=============================

@@ -1,0 +1,8 @@
+=============================Start excuting TestCase caseId:ArticleMange_updateArticleLike_caseID_001 新增ArticleMange_updateArticleLike_TemplateCase=================
+{"args":{"argTypes":["java.lang.Long"],"inputArgs":[0],"virtualObjects":[{"description":"id","flags":{},"objBaseDesc":"id","objBaseName":"Long","objClass":"java.lang.Long","object":0}]},"depDataSet":{"virtualTables":[]},"description":"新增ArticleMange_updateArticleLike_TemplateCase","expectDataSet":{"virtualTables":[]},"expectEventSet":{"virtualEventObjects":[]},"expectException":{},"expectResult":{"result":{"flags":{}},"virtualObject":{"$ref":"$.expectResult.result"}},"virtualParams":{"params":{}}}
+====================Cleaning up DB data preparations=============================
+Preparing DB data:
+Start to invoke method:updateArticleLike parameters:
+[0]
+Exception Invocationnull
+====================Cleaning up DB data preparations=============================

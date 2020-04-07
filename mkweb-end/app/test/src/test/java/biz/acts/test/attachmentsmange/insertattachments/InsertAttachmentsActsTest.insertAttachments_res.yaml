@@ -1,0 +1,40 @@
+AttachmentsMange_insertAttachments_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: attachmentsParam
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: attachmentsParam
+      objBaseName: AttachmentsParam
+      objClass: com.soft.sakd.biz.param.AttachmentsParam
+      object: !!com.soft.sakd.biz.param.AttachmentsParam {id: null, name: null, size: null,
+        status: null, type: null, uid: null, url: null}
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增AttachmentsMange_insertAttachments_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}

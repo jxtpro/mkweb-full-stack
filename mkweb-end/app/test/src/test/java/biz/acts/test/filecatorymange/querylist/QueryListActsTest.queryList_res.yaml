@@ -1,0 +1,38 @@
+FileCatoryMange_queryList_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args: {description: null, inputArgs: null}
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增FileCatoryMange_queryList_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: SearchResult
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: SearchResult
+      objBaseName: SearchResult
+      objClass: com.soft.sakd.common.search.bean.SearchResult
+      object: !!com.soft.sakd.common.search.bean.SearchResult
+        data: null
+        list:
+        - !!com.soft.sakd.common.dto.FileCatoryDto {id: 1, name: 技术}
+        - !!com.soft.sakd.common.dto.FileCatoryDto {id: 2, name: 动态}
+        - !!com.soft.sakd.common.dto.FileCatoryDto {id: 3, name: 前沿}
+        msg: null
+        params: null
+        status: true
+        totalCount: 0
+    resultClazz: com.soft.sakd.common.search.bean.SearchResult
+  virtualParams:
+    description: null
+    params: {}

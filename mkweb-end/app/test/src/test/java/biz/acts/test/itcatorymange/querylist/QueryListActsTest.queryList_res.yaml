@@ -1,0 +1,39 @@
+ItCatoryMange_queryList_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args: {description: null, inputArgs: null}
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ItCatoryMange_queryList_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: SearchResult
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: SearchResult
+      objBaseName: SearchResult
+      objClass: com.soft.sakd.common.search.bean.SearchResult
+      object: !!com.soft.sakd.common.search.bean.SearchResult
+        data: null
+        list:
+        - !!com.soft.sakd.common.dto.ItCatoryDto {id: 1, name: java}
+        - !!com.soft.sakd.common.dto.ItCatoryDto {id: 2, name: react}
+        - !!com.soft.sakd.common.dto.ItCatoryDto {id: 3, name: antd}
+        - !!com.soft.sakd.common.dto.ItCatoryDto {id: 4, name: k8s}
+        msg: null
+        params: null
+        status: true
+        totalCount: 0
+    resultClazz: com.soft.sakd.common.search.bean.SearchResult
+  virtualParams:
+    description: null
+    params: {}

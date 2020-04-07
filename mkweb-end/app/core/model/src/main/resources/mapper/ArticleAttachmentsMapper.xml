@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.sakd.core.model.mapper.ArticleAttachmentsMapper">
+  <resultMap id="BaseResultMap" type="com.soft.sakd.core.model.entity.ArticleAttachments">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="article_id" jdbcType="BIGINT" property="articleId"/>
+    <result column="attachment_id" jdbcType="BIGINT" property="attachmentId"/>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_article_attachments
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.soft.sakd.core.model.entity.ArticleAttachments"
+    keyProperty="id"
+    useGeneratedKeys="true">
+    insert into t_article_attachments (id, article_id, attachment_id
+    )
+    values (#{id,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{attachmentId,jdbcType=BIGINT}
+    )
+  </insert>
+  <update id="updateByPrimaryKey"
+    parameterType="com.soft.sakd.core.model.entity.ArticleAttachments">
+    update t_article_attachments
+    set article_id = #{articleId,jdbcType=BIGINT},
+    attachment_id = #{attachmentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, article_id, attachment_id
+    from t_article_attachments
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, article_id, attachment_id
+    from t_article_attachments
+  </select>
+  <delete id="deleteAllByArtileId" parameterType="java.lang.Long">
+    delete from t_article_attachments
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into t_article_attachments (article_id, attachment_id)
+    values
+    <foreach collection="list" index="index" item="item" separator=",">
+      (#{item.articleId,jdbcType=BIGINT}, #{item.attachmentId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  <select id="queryByArticleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select article_id, attachment_id
+    from t_article_attachments where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+</mapper>

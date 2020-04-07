@@ -1,0 +1,7 @@
+=============================Start excuting TestCase caseId:FileCatoryMange_queryList_caseID_001 新增FileCatoryMange_queryList_TemplateCase=================
+{"args":{"argTypes":[]},"depDataSet":{"virtualTables":[]},"description":"新增FileCatoryMange_queryList_TemplateCase","expectDataSet":{"virtualTables":[]},"expectEventSet":{"virtualEventObjects":[]},"expectException":{},"expectResult":{"result":{"flags":{}},"virtualObject":{"$ref":"$.expectResult.result"}},"virtualParams":{"params":{}}}
+====================Cleaning up DB data preparations=============================
+Preparing DB data:
+Start to invoke method:queryList parameters:
+Invocation result: {"list":[{"id":1,"name":"技术"},{"id":2,"name":"动态"},{"id":3,"name":"前沿"}],"status":true,"totalCount":0}
+====================Cleaning up DB data preparations=============================

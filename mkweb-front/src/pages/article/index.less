@@ -1,0 +1,35 @@
+@import '~antd/lib/style/themes/default.less';
+
+.form_layout{
+  margin-bottom: 16px;
+  .form_item{
+    display: inline-flex;
+    flex-direction: column;
+    width: 300px;
+    margin-top: 16px;
+    span{
+        margin-bottom: 8px;
+    }
+  }
+  .form_item_content{
+    width: auto;
+    margin-top: 16px;
+    span{
+        margin-bottom: 8px;
+    }
+  }
+  .save_btn {
+    margin: 0 auto;
+  }
+
+  :global {
+    .ant-select-selection-item-content{
+      display: inline-block;
+      margin-right: 4px;
+      overflow: visible;
+      white-space: nowrap;
+      text-overflow: unset;
+      min-width: 100%;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.sakd.core.model.mapper.ArticleItCatoryMapper">
+  <resultMap id="BaseResultMap" type="com.soft.sakd.core.model.entity.ArticleItCatory">
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="it_catory_id" jdbcType="BIGINT" property="itCatoryId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.soft.sakd.core.model.entity.ArticleItCatory">
+    insert into t_article_it_catory (article_id, it_catory_id)
+    values (#{articleId,jdbcType=BIGINT}, #{itCatoryId,jdbcType=BIGINT})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select article_id, it_catory_id
+    from t_article_it_catory
+  </select>
+
+  <select id="queryByArticleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select article_id, it_catory_id
+    from t_article_it_catory where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteAllByArtileId" parameterType="java.lang.Long">
+    delete from t_article_it_catory
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into t_article_it_catory (article_id, it_catory_id)
+    values
+    <foreach collection="list" index="index" item="item" separator=",">
+      (#{item.articleId,jdbcType=BIGINT}, #{item.itCatoryId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

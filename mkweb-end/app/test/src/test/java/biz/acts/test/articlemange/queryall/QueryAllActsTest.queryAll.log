@@ -1,0 +1,8 @@
+=============================Start excuting TestCase caseId:ArticleMange_queryAll_caseID_001 新增ArticleMange_queryAll_TemplateCase=================
+{"args":{"argTypes":["java.lang.Integer","java.lang.Integer"],"inputArgs":[0,0],"virtualObjects":[{"description":"pageSize","flags":{},"objBaseDesc":"pageSize","objBaseName":"Integer","objClass":"java.lang.Integer","object":0},{"description":"page","flags":{},"objBaseDesc":"page","objBaseName":"Integer","objClass":"java.lang.Integer","object":0}]},"depDataSet":{"virtualTables":[]},"description":"新增ArticleMange_queryAll_TemplateCase","expectDataSet":{"virtualTables":[]},"expectEventSet":{"virtualEventObjects":[]},"expectException":{},"expectResult":{"result":{"flags":{}},"virtualObject":{"$ref":"$.expectResult.result"}},"virtualParams":{"params":{}}}
+====================Cleaning up DB data preparations=============================
+Preparing DB data:
+Start to invoke method:queryAll parameters:
+[0, 0]
+Invocation result: {"list":[],"status":true,"totalCount":1}
+====================Cleaning up DB data preparations=============================

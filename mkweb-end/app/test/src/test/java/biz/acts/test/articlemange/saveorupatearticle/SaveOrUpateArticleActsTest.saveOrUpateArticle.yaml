@@ -1,0 +1,47 @@
+ArticleMange_saveOrUpateArticle_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: param
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: param
+      objBaseName: ArticleParam
+      objClass: com.soft.sakd.biz.param.ArticleParam
+      object: !!com.soft.sakd.biz.param.ArticleParam
+        content: null
+        fileCatory: []
+        fileDesc: null
+        fileEnclosure: []
+        fileName: null
+        id: null
+        itCatory: []
+        userId: null
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_saveOrUpateArticle_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}

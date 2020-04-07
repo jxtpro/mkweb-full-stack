@@ -1,0 +1,53 @@
+ArticleMange_queryAll_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: pageSize
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: pageSize
+      objBaseName: Integer
+      objClass: java.lang.Integer
+      object: 0
+    - description: page
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: page
+      objBaseName: Integer
+      objClass: java.lang.Integer
+      object: 0
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_queryAll_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: SearchResult
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: SearchResult
+      objBaseName: SearchResult
+      objClass: com.soft.sakd.common.search.bean.SearchResult
+      object: !!com.soft.sakd.common.search.bean.SearchResult
+        data: null
+        list: []
+        msg: null
+        params: null
+        status: true
+        totalCount: 1
+    resultClazz: com.soft.sakd.common.search.bean.SearchResult
+  virtualParams:
+    description: null
+    params: {}

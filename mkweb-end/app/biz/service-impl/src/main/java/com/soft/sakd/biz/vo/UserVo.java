@@ -8,7 +8,7 @@ import java.util.List;
  * @since 2020/4/4 17:01
  */
 public class UserVo {
-  private String name;
+  private String userName;
   private String avatar;
   private Long userId;
   private String email;
@@ -19,13 +19,23 @@ public class UserVo {
   private String country;
   private String address;
   private String phone;
+  private String password;
 
-  public String getName() {
-    return name;
+
+  public String getPassword() {
+    return password;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   public String getAvatar() {

@@ -42,10 +42,9 @@ public class AttachmentsBizConvert
 
   public List<AttachmentsVo> dtoToListVo(List<AttachmentsDto> attachmentsDtoList) {
     List<AttachmentsVo> attachmentsVoList = Lists.newArrayList();
-    attachmentsDtoList.forEach(
-        item -> {
-          attachmentsVoList.add(dtoToVo(item));
-        });
+    attachmentsDtoList.forEach(attachmentsDto -> {
+      attachmentsVoList.add(dtoToVo(attachmentsDto));
+    });
 
     return attachmentsVoList;
   }

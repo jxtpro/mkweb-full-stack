@@ -46,7 +46,7 @@ const EditorArticle: React.FC<EditorArticleProps> = (props) => {
       (resolve, reject) => {
         let formData = new FormData()
         formData.append('file', file)
-        fetch(`http://mkweb:8803/api/upload`, {
+        fetch(`/api/upload`, {
           method: 'POST',
           headers: {
             //   'store-user-token':sys.token

@@ -1,5 +1,6 @@
 package com.soft.sakd.task;
 
+import com.soft.sakd.common.facade.ResourcesService;
 import com.soft.sakd.core.model.entity.SResource;
 import com.soft.sakd.core.model.mapper.SResourceMapper;
 import java.util.List;
@@ -13,17 +14,16 @@ public class BigMysqlDataTask implements Callable<List<SResource>> {
 
   private final int pageSize;
   private final int page;
-  private final SResourceMapper sResourceMapper;
+  private final ResourcesService resourcesService;
 
-  public BigMysqlDataTask(int page, int pageSize, SResourceMapper sResourceMapper) {
+  public BigMysqlDataTask(int pageSize, int page,  ResourcesService resourcesService) {
     this.page = page;
     this.pageSize = pageSize;
-    this.sResourceMapper = sResourceMapper;
+    this.resourcesService = resourcesService;
   }
 
   @Override
   public List<SResource> call() throws Exception {
-    System.out.println("thread name : " + Thread.currentThread().getName());
-    return sResourceMapper.findByLimit(page, pageSize);
+    return resourcesService.findByLimit(pageSize,page);
   }
 }

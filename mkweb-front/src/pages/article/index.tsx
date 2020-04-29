@@ -3,7 +3,6 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect, history, useIntl } from 'umi';
 import { ConnectState } from '@/models/connect';
 import { Form, Select, Upload, Button, Input, message, AutoComplete } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 import EditorArticle from '@/components/EditorArticle';
 import MyUpload from '@/components/MyUpload';
 import { addArticle, queryFileCatoryList, queryItCatoryList, queryArticle } from './service';
@@ -165,7 +164,7 @@ const EditorArticleForm: React.FC<{}> = (props) => {
     };
     // 处理上传
     const uploadProprs = {
-        action: 'http://mkweb:8803/api/upload',
+        action: '/api/upload',
         onChange: handleChange,
         multiple: true,
     };

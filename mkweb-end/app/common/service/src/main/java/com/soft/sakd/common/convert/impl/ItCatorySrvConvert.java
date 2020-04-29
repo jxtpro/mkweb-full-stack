@@ -30,19 +30,17 @@ public class ItCatorySrvConvert implements SrvConvert<ItCatoryDto, ItCatory> {
 
   public List<ItCatoryDto> toListDto(List<ItCatory> itCatoryList) {
     List<ItCatoryDto> itCatoryDtoList = Lists.newArrayList();
-    itCatoryList.forEach(
-        item -> {
-          itCatoryDtoList.add(toDto(item));
-        });
+    itCatoryList.forEach(itCatory -> {
+      itCatoryDtoList.add(toDto(itCatory));
+    });
     return itCatoryDtoList;
   }
 
   public List<ItCatory> toListDao(List<ItCatoryDto> itCatoryDtoList) {
     List<ItCatory> itCatoryList = Lists.newArrayList();
-    itCatoryDtoList.forEach(
-        item -> {
-          itCatoryList.add(toDao(item));
-        });
+    itCatoryDtoList.forEach(itCatoryDto -> {
+      itCatoryList.add(toDao(itCatoryDto));
+    });
     return itCatoryList;
   }
 }

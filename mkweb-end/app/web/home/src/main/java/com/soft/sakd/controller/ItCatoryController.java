@@ -1,7 +1,7 @@
 package com.soft.sakd.controller;
 
 import com.soft.sakd.biz.mange.ItCatoryMange;
-import com.soft.sakd.common.search.bean.SearchResult;
+import com.soft.sakd.common.search.bean.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 public class ItCatoryController {
-  @Autowired public ItCatoryMange itCatoryMange;
+
+  @Autowired
+  private ItCatoryMange itCatoryMange;
 
   @RequestMapping("/itCatory/queryList")
-  public SearchResult queryList() {
+  public Result queryList() {
     return itCatoryMange.queryList();
   }
 }

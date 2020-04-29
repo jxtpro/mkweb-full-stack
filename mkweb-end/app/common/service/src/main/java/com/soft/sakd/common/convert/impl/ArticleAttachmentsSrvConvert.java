@@ -34,20 +34,18 @@ public class ArticleAttachmentsSrvConvert
   @Override
   public List<ArticleAttachmentsDto> toListDto(List<ArticleAttachments> attachmentsList) {
     List<ArticleAttachmentsDto> articleAttachmentsDtoList = Lists.newArrayList();
-    attachmentsList.forEach(
-        item -> {
-          articleAttachmentsDtoList.add(toDto(item));
-        });
+    attachmentsList.forEach(attachments -> {
+      articleAttachmentsDtoList.add(toDto(attachments));
+    });
     return articleAttachmentsDtoList;
   }
 
   @Override
   public List<ArticleAttachments> toListDao(List<ArticleAttachmentsDto> attachmentsDtoList) {
     List<ArticleAttachments> articleAttachmentsList = Lists.newArrayList();
-    attachmentsDtoList.forEach(
-        item -> {
-          articleAttachmentsList.add(toDao(item));
-        });
+    attachmentsDtoList.forEach(attachmentsDto -> {
+      articleAttachmentsList.add(toDao(attachmentsDto));
+    });
     return articleAttachmentsList;
   }
 }

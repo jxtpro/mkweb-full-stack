@@ -17,5 +17,7 @@ public interface SResourceMapper {
 
   SResource findByName(String name);
 
-  List<SResource> findByLimit(@Param("page") int page, @Param("pageSize") int pageSize);
+  List<SResource> findByLimit(@Param("pageSize") int pageSize, @Param("page") int page);
+
+  List<SResource> findByKeyWordLimit(@Param("keyWord") String keyWord, @Param("pageSize") int pageSize, @Param("page") int page);
 }

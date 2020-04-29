@@ -25,31 +25,21 @@ public class ArticleBizConvert implements BizConvert<ArticleVo, ArticleParam, Ar
     articleDto.setFileName(param.getFileName());
     articleDto.setFileDesc(param.getFileDesc());
     articleDto.setUserId(param.getUserId());
-    param
-        .getFileCatory()
-        .forEach(
-            item -> {
-              FileCatoryDto dto = new FileCatoryDto();
-              dto.setId(item);
-              articleDto.getFileCatory().add(dto);
-            });
-    param
-        .getItCatory()
-        .forEach(
-            item -> {
-              ItCatoryDto dto = new ItCatoryDto();
-              dto.setId(item);
-              articleDto.getItCatory().add(dto);
-            });
-
-    param
-        .getAttachments()
-        .forEach(
-            item -> {
-              AttachmentsDto dto = new AttachmentsDto();
-              dto.setId(item.getId());
-              articleDto.getAttachments().add(dto);
-            });
+    param.getFileCatory().forEach(fileCatoryId -> {
+      FileCatoryDto dto = new FileCatoryDto();
+      dto.setId(fileCatoryId);
+      articleDto.getFileCatory().add(dto);
+    });
+    param.getItCatory().forEach(itCatoryId -> {
+      ItCatoryDto dto = new ItCatoryDto();
+      dto.setId(itCatoryId);
+      articleDto.getItCatory().add(dto);
+    });
+    param.getAttachments().forEach(attachmentsParam -> {
+      AttachmentsDto dto = new AttachmentsDto();
+      dto.setId(attachmentsParam.getId());
+      articleDto.getAttachments().add(dto);
+    });
     return articleDto;
   }
 
@@ -62,28 +52,28 @@ public class ArticleBizConvert implements BizConvert<ArticleVo, ArticleParam, Ar
     articleVo.setFileDesc(articleDto.getFileDesc());
     articleVo.setContent(articleDto.getContent());
 
-    for (FileCatoryDto item : articleDto.getFileCatory()) {
+    for (FileCatoryDto fileCatoryDto : articleDto.getFileCatory()) {
       FileCatoryVo fileCatoryVo = new FileCatoryVo();
-      fileCatoryVo.setId(item.getId());
-      fileCatoryVo.setName(item.getName());
+      fileCatoryVo.setId(fileCatoryDto.getId());
+      fileCatoryVo.setName(fileCatoryDto.getName());
       articleVo.getFileCatory().add(fileCatoryVo);
     }
-    for (ItCatoryDto item : articleDto.getItCatory()) {
+    for (ItCatoryDto itCatoryDto : articleDto.getItCatory()) {
       ItCatoryVo itCatoryVo = new ItCatoryVo();
-      itCatoryVo.setId(item.getId());
-      itCatoryVo.setName(item.getName());
+      itCatoryVo.setId(itCatoryDto.getId());
+      itCatoryVo.setName(itCatoryDto.getName());
       articleVo.getItCatory().add(itCatoryVo);
     }
 
-    for (AttachmentsDto item : articleDto.getAttachments()) {
+    for (AttachmentsDto attachmentsDto : articleDto.getAttachments()) {
       AttachmentsVo attachmentsVo = new AttachmentsVo();
-      attachmentsVo.setId(item.getId());
-      attachmentsVo.setName(item.getName());
-      attachmentsVo.setSize(item.getSize());
-      attachmentsVo.setUrl(item.getUrl());
-      attachmentsVo.setUid(item.getUid());
-      attachmentsVo.setType(item.getType());
-      attachmentsVo.setStatus(item.getStatus());
+      attachmentsVo.setId(attachmentsDto.getId());
+      attachmentsVo.setName(attachmentsDto.getName());
+      attachmentsVo.setSize(attachmentsDto.getSize());
+      attachmentsVo.setUrl(attachmentsDto.getUrl());
+      attachmentsVo.setUid(attachmentsDto.getUid());
+      attachmentsVo.setType(attachmentsDto.getType());
+      attachmentsVo.setStatus(attachmentsDto.getStatus());
       articleVo.getAttachments().add(attachmentsVo);
     }
     return articleVo;

@@ -33,21 +33,21 @@ ArticleMange_queryAll_caseID_001: !!com.alipay.test.acts.model.PrepareData
   expectResult:
     description: null
     result:
-      description: SearchResult
+      description: Result
       flags: {}
       nodeDesc: null
       nodeGroup: null
-      objBaseDesc: SearchResult
-      objBaseName: SearchResult
-      objClass: com.soft.sakd.common.search.bean.SearchResult
-      object: !!com.soft.sakd.common.search.bean.SearchResult
+      objBaseDesc: Result
+      objBaseName: Result
+      objClass: com.soft.sakd.common.search.bean.Result
+      object: !!com.soft.sakd.common.search.bean.Result
         data: null
         list: []
-        msg: null
-        params: null
+        msg: ''
+        params: {}
         status: true
-        totalCount: 1
-    resultClazz: com.soft.sakd.common.search.bean.SearchResult
+        totalCount: 2
+    resultClazz: com.soft.sakd.common.search.bean.Result
   virtualParams:
     description: null
     params: {}

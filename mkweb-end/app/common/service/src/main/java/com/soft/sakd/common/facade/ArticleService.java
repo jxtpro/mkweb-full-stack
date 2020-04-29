@@ -9,16 +9,22 @@ import java.util.List;
  * @since 2020/4/2 10:23
  */
 public interface ArticleService {
+
   // 新增文章
-  Long insertArticle(ArticleDto article);
+  ArticleDto insertArticle(ArticleDto article) throws ServiceException;
+
   // 分页查询
   List<ArticleDto> queryAll(int pageSize, int page);
+
   // 统计文章总数
   Integer countArticle();
+
   // 按照ID查询文档详情
   ArticleDto queryArticleById(Long id);
+
   // 更新文章
-  Long updateArticle(ArticleDto articleDto) throws ServiceException;
+  void updateArticle(ArticleDto articleDto) throws ServiceException;
+
   // 返回影响行数
   int updateArticleLike(Long id);
 

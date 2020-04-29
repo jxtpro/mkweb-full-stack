@@ -1,6 +1,6 @@
 package com.soft.sakd.biz.mange;
 
-import com.soft.sakd.common.search.bean.SearchResult;
+import com.soft.sakd.common.search.bean.Result;
 
 /**
  * @author xujie
@@ -8,5 +8,5 @@ import com.soft.sakd.common.search.bean.SearchResult;
  */
 public interface FileCatoryMange {
 
-  SearchResult queryList();
+  Result queryList();
 }

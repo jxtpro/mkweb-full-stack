@@ -39,6 +39,12 @@ export default defineConfig({
           path: '/user/login',
           component: './user/login',
         },
+        {
+          name: 'article.edit.index',
+          icon: 'table',
+          path: '/user/edit/:id',
+          component: './article',
+        },
       ],
     },
     {
@@ -58,12 +64,6 @@ export default defineConfig({
               name: 'welcome',
               icon: 'smile',
               component: './Welcome',
-            },
-            {
-              name: 'article.edit.index',
-              icon: 'table',
-              path: '/edit/:id',
-              component: './article',
             },
             {
               component: './404',

@@ -73,4 +73,9 @@
     name, notes, sort_num, optlock, parent_id
     from s_resource LIMIT ${(page-1)*pageSize},${pageSize};
   </select>
+  <select id="findByKeyWordLimit" resultMap="BaseResultMap">
+    select id, create_at, create_by, is_deleted, update_at, update_by, icon_sclass, include_uri,
+    name, notes, sort_num, optlock, parent_id
+    from s_resource where name like concat('%', #{keyWord,jdbcType=VARCHAR}, '%') LIMIT ${(page-1)*pageSize},${pageSize};
+  </select>
 </mapper>

@@ -1,7 +1,7 @@
 package com.soft.sakd.biz.mange;
 
 import com.soft.sakd.biz.param.ArticleParam;
-import com.soft.sakd.common.search.bean.SearchResult;
+import com.soft.sakd.common.search.bean.Result;
 
 /**
  * @author xujie
@@ -15,7 +15,7 @@ public interface ArticleMange {
    * @param param
    * @return
    */
-  SearchResult saveOrUpateArticle(ArticleParam param);
+  Result saveOrUpateArticle(ArticleParam param);
 
   /**
    * 分页查询所有文章
@@ -24,29 +24,29 @@ public interface ArticleMange {
    * @param page
    * @return
    */
-  SearchResult queryAll(int pageSize, int page);
+  Result queryAll(int pageSize, int page);
 
   /**
    * 查询单个文章
    *
-   * @param id
+   * @param articleId
    * @return
    */
-  SearchResult queryArticleById(Long id);
+  Result queryArticleById(Long articleId);
 
   /**
    * 随意点赞
    *
-   * @param id
+   * @param articleId
    * @return
    */
-  SearchResult updateArticleLike(Long id);
+  Result updateArticleLike(Long articleId);
 
   /**
    * 更新浏览量
    *
-   * @param id
+   * @param articleId
    * @return
    */
-  SearchResult updateArticleBrowse(Long id);
+  Result updateArticleBrowse(Long articleId);
 }

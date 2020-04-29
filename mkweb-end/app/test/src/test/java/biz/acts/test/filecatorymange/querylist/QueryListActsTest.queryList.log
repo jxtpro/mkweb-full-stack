@@ -3,5 +3,5 @@
 ====================Cleaning up DB data preparations=============================
 Preparing DB data:
 Start to invoke method:queryList parameters:
-Invocation result: {"list":[{"id":1,"name":"æŠ€æœ¯"},{"id":2,"name":"åŠ¨æ€"},{"id":3,"name":"å‰æ²¿"}],"status":true,"totalCount":0}
+Invocation result: {"list":[{"id":1,"name":"¼¼Êõ"},{"id":2,"name":"¶¯Ì¬"},{"id":3,"name":"Ç°ÑØ"}],"msg":"","params":{},"status":true,"totalCount":0}
 ====================Cleaning up DB data preparations=============================

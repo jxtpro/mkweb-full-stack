@@ -1,14 +1,20 @@
 package com.soft.sakd.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import com.soft.sakd.common.facade.ResourcesService;
 import com.soft.sakd.core.model.entity.SResource;
 import com.soft.sakd.core.model.mapper.SResourceMapper;
 import com.soft.sakd.task.BigMysqlDataTask;
+import com.soft.sakd.task.BigMysqlDataTaskWithKeyWord;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +33,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class DemoController {
 
-  @Autowired private SResourceMapper sResourceMapper;
+  @Autowired private ResourcesService resourcesService;
 
-  private ExecutorService executor = Executors.newFixedThreadPool(100);
-  //  private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 2000,
-  //      TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(100));
+  //  private ExecutorService executor = Executors.newSingleThreadExecutor();
+//  private ExecutorService executor = Executors.newFixedThreadPool(15);
+      private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 5,
+          TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(10));
 
   /**
    * 并发插入死锁
@@ -42,11 +49,11 @@ public class DemoController {
   @ResponseBody
   @Transactional
   public SResource deadlock() {
-    SResource entity = sResourceMapper.findByName("test");
+    SResource entity = resourcesService.findByName("test");
     if (entity != null) {
       SResource entity1 = new SResource();
       entity1.setName("test");
-      sResourceMapper.insert(entity1);
+      resourcesService.insert(entity1);
     }
     return entity;
   }
@@ -68,7 +75,7 @@ public class DemoController {
     if (StringUtils.isEmpty(entity.getName())) {
       return entity;
     }
-    SResource r = sResourceMapper.findByName(entity.getName());
+    SResource r = resourcesService.findByName(entity.getName());
     //    if (r != null && r.getVersion().equals(entity.getVersion())) {
     //      r.setSortNum(r.getSortNum() - 100);
     //      r.setNotes(Thread.currentThread().getName());
@@ -86,7 +93,7 @@ public class DemoController {
   @ResponseBody
   public String watch() {
     StopWatch stopWatch = StopWatch.createStarted();
-    List<SResource> result = sResourceMapper.selectAll();
+    List<SResource> result = resourcesService.selectAll();
     stopWatch.stop();
     String times = "总耗时：" + stopWatch.getTime(TimeUnit.SECONDS) + "s, 查询条数：" + result.size();
     System.out.println(times);
@@ -110,23 +117,37 @@ public class DemoController {
   @RequestMapping("/thread")
   @ResponseBody
   public String thread() {
-    StopWatch stopWatch = StopWatch.createStarted();
-    List<Future<List<SResource>>> result = Lists.newArrayList();
-    for (int i = 0; i < 100; i++) {
-      result.add(executor.submit(new BigMysqlDataTask(i, 20000, sResourceMapper)));
-    }
+    List<Future<List<SResource>>> result = Lists.newLinkedList();
     int count = 0;
-    // 分100个线程, 每个线程跑2w条数据,所以第一条数据是 0,0 最后一条数据是99,199999
+    for (int i = 1; i <= 4; i++) {
+      result.add(executor.submit(new BigMysqlDataTaskWithKeyWord("-4",500000, i, resourcesService)));
+    }
+
+    StopWatch stopWatch = StopWatch.createStarted();
     try {
       for (Future<List<SResource>> item : result) {
-        List<SResource> rs = item.get();
-        count = count + rs.size();
+        count = count + item.get().size();
       }
     } catch (InterruptedException e) {
+      e.printStackTrace();
     } catch (ExecutionException e) {
+      e.printStackTrace();
     }
     stopWatch.stop();
-    String times = "总耗时 : " + stopWatch.getTime(TimeUnit.SECONDS) + " s, 查询总数为 : " + count;
+    String times =
+        "总耗时 : " + stopWatch.getTime(TimeUnit.MILLISECONDS) / 1000F + " s, 查询结果 : " + count;
+    System.out.println(times);
+    return times;
+  }
+
+  @RequestMapping("/thread2")
+  @ResponseBody
+  public String thread2() {
+    StopWatch stopWatch = StopWatch.createStarted();
+    List<SResource> sResourceList = resourcesService.findByKeyWordLimit("-4", 2000000, 1);
+    stopWatch.stop();
+    String times =
+        "总耗时 : " + stopWatch.getTime(TimeUnit.MILLISECONDS) / 1000F + " s, 查询结果 : " + sResourceList.size();
     System.out.println(times);
     return times;
   }

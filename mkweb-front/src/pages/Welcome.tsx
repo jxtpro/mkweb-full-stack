@@ -1,15 +1,15 @@
 import React from 'react';
 import { Card, Row, Col, Typography, List, Avatar, Drawer, Button, message } from 'antd';
 import { ConnectState } from '@/models/connect';
-import { CurrentUser } from '@/models/user';
 import { history, formatMessage, connect } from 'umi';
 import { queryArticleAll, updateArticleLike, updateArticleBrowse } from './service';
 import { LikeOutlined, RiseOutlined, EditOutlined } from '@ant-design/icons';
 import styles from './Welcome.less';
+import { getAuthority } from '../utils/authority';
 
 const { Title, Paragraph, Text } = Typography;
 const gotoAddShare = () => {
-  history.push('/edit/0')
+  history.push('/user/edit/0')
 }
 
 const IconText = ({ icon, text, onClick }) => (
@@ -19,12 +19,9 @@ const IconText = ({ icon, text, onClick }) => (
   </span>
 );
 
-interface WelcomeProps {
-  currentUser?: CurrentUser;
-};
 
 
-class Welcome extends React.Component<WelcomeProps> {
+class Welcome extends React.Component {
 
   state = {
     renderListData: [],
@@ -70,15 +67,16 @@ class Welcome extends React.Component<WelcomeProps> {
   }
 
   // 待优化
-  checkAuth(auth: any[], params: string) {
+  checkAuth(param: string) {
+    const auth = getAuthority()
     if (auth && auth.length > 0) {
-      return auth.find(value => value === params)
+      return auth.find(value => value === param)
     }
     return false;
   };
 
   edit(id: number) {
-    history.push(`/edit/${id}`)
+    history.push(`/user/edit/${id}`)
   }
 
   like(item: number) {
@@ -86,7 +84,15 @@ class Welcome extends React.Component<WelcomeProps> {
       if (res && res.status) {
         message.info("你 good ! , like you !")
         let data = this.state.renderListData;
-        this.setState({ renderListData: data.map((item: any) => ({ ...item, ...{ likeCount: item.likeCount + 1 } })) });
+        this.setState({
+          renderListData: data.map((article: any) => {
+            if (article.id === item.id) {
+              return { ...article, ...{ likeCount: article.likeCount + 1 } }
+            } else {
+              return { ...article }
+            }
+          })
+        });
       }
     })
   }
@@ -94,18 +100,24 @@ class Welcome extends React.Component<WelcomeProps> {
     updateArticleBrowse(item.id).then(res => {
       if (res && res.status) {
         let data = this.state.renderListData;
-        this.setState({ renderListData: data.map((item: any) => ({ ...item, ...{ browseCount: item.browseCount + 1 } })) });
+        this.setState({
+          renderListData: data.map((article: any) => {
+            if (article.id === item.id) {
+              return { ...article, ...{ browseCount: article.browseCount + 1 } }
+            } else {
+              return { ...article }
+            }
+          })
+        });
       }
     })
   }
 
   render() {
-    const { currentUser } = this.props;
-
     return (
       <Row>
         <Col span={16} offset={1} xs={24} sm={24} md={17} lg={16} xl={16}>
-          <Card extra={this.checkAuth(currentUser?.auth, 'admin') ? <a onClick={gotoAddShare}>新增</a> : null}>
+          <Card extra={this.checkAuth('admin') ? <a onClick={gotoAddShare}>新增</a> : null}>
             <Title level={3}>{formatMessage({ id: 'welcome.site.content.share.title' })}</Title>
             <List
               itemLayout="vertical"
@@ -123,7 +135,7 @@ class Welcome extends React.Component<WelcomeProps> {
                   actions={[
                     <IconText icon={RiseOutlined} text={item.browseCount ? item.browseCount : 0} key="list-vertical-star-o" onClick={null} />,
                     <IconText icon={LikeOutlined} text={item.likeCount ? item.likeCount : 0} key="list-vertical-like-o" onClick={() => { this.like(item) }} />,
-                    (currentUser && this.checkAuth(currentUser?.auth, 'admin') && (<IconText icon={EditOutlined} text="编辑" onClick={() => { this.edit(item.id) }} key="list-vertical-edit-o" />))
+                    (this.checkAuth('admin') && (<IconText icon={EditOutlined} text="编辑" onClick={() => { this.edit(item.id) }} key="list-vertical-edit-o" />))
                   ]}
                   extra={
                     <img
@@ -184,6 +196,4 @@ class Welcome extends React.Component<WelcomeProps> {
   }
 }
 
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(Welcome);
+export default Welcome;

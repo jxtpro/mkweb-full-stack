@@ -1,3 +1,298 @@
+ArticleMange_queryAll_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: pageSize
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: pageSize
+      objBaseName: Integer
+      objClass: java.lang.Integer
+      object: 0
+    - description: page
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: page
+      objBaseName: Integer
+      objClass: java.lang.Integer
+      object: 0
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_queryAll_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: Result
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: Result
+      objBaseName: Result
+      objClass: com.soft.sakd.common.search.bean.Result
+      object: !!com.soft.sakd.common.search.bean.Result
+        data: null
+        list: []
+        msg: ''
+        params: {}
+        status: true
+        totalCount: 2
+    resultClazz: com.soft.sakd.common.search.bean.Result
+  virtualParams:
+    description: null
+    params: {}
+ArticleMange_queryArticleById_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: id
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: id
+      objBaseName: Long
+      objClass: java.lang.Long
+      object: 0
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_queryArticleById_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}
+ArticleMange_saveOrUpateArticle_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: param
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: param
+      objBaseName: ArticleParam
+      objClass: com.soft.sakd.biz.param.ArticleParam
+      object: !!com.soft.sakd.biz.param.ArticleParam
+        attachments: []
+        content: null
+        fileCatory: []
+        fileDesc: null
+        fileName: null
+        id: null
+        itCatory: []
+        userId: null
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_saveOrUpateArticle_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}
+ArticleMange_updateArticleBrowse_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: id
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: id
+      objBaseName: Long
+      objClass: java.lang.Long
+      object: 0
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_updateArticleBrowse_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}
+ArticleMange_updateArticleLike_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: id
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: id
+      objBaseName: Long
+      objClass: java.lang.Long
+      object: 0
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增ArticleMange_updateArticleLike_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}
+AttachmentsMange_insertAttachments_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args:
+    description: null
+    inputArgs:
+    - description: attachmentsParam
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: attachmentsParam
+      objBaseName: AttachmentsParam
+      objClass: com.soft.sakd.biz.param.AttachmentsParam
+      object: !!com.soft.sakd.biz.param.AttachmentsParam {id: null, name: null, size: null,
+        status: null, type: null, uid: null, url: null}
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增AttachmentsMange_insertAttachments_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: null
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: null
+      objBaseName: null
+      objClass: null
+      object: null
+    resultClazz: null
+  virtualParams:
+    description: null
+    params: {}
+FileCatoryMange_queryList_caseID_001: !!com.alipay.test.acts.model.PrepareData
+  args: {description: null, inputArgs: null}
+  depDataSet:
+    description: null
+    virtualTables: []
+  description: 新增FileCatoryMange_queryList_TemplateCase
+  expectDataSet:
+    description: null
+    virtualTables: []
+  expectEventSet:
+    description: null
+    virtualEventObjects: []
+  expectException: {description: null, exceptionClass: null, expectException: null,
+    expectExceptionObject: null}
+  expectResult:
+    description: null
+    result:
+      description: Result
+      flags: {}
+      nodeDesc: null
+      nodeGroup: null
+      objBaseDesc: Result
+      objBaseName: Result
+      objClass: com.soft.sakd.common.search.bean.Result
+      object: !!com.soft.sakd.common.search.bean.Result
+        data: null
+        list:
+        - !!com.soft.sakd.common.dto.FileCatoryDto {id: 1, name: ����}
+        - !!com.soft.sakd.common.dto.FileCatoryDto {id: 2, name: ��̬}
+        - !!com.soft.sakd.common.dto.FileCatoryDto {id: 3, name: ǰ��}
+        msg: ''
+        params: {}
+        status: true
+        totalCount: 0
+    resultClazz: com.soft.sakd.common.search.bean.Result
+  virtualParams:
+    description: null
+    params: {}
 ItCatoryMange_queryList_caseID_001: !!com.alipay.test.acts.model.PrepareData
   args: {description: null, inputArgs: null}
   depDataSet:
@@ -15,25 +310,25 @@ ItCatoryMange_queryList_caseID_001: !!com.alipay.test.acts.model.PrepareData
   expectResult:
     description: null
     result:
-      description: SearchResult
+      description: Result
       flags: {}
       nodeDesc: null
       nodeGroup: null
-      objBaseDesc: SearchResult
-      objBaseName: SearchResult
-      objClass: com.soft.sakd.common.search.bean.SearchResult
-      object: !!com.soft.sakd.common.search.bean.SearchResult
+      objBaseDesc: Result
+      objBaseName: Result
+      objClass: com.soft.sakd.common.search.bean.Result
+      object: !!com.soft.sakd.common.search.bean.Result
         data: null
         list:
         - !!com.soft.sakd.common.dto.ItCatoryDto {id: 1, name: java}
         - !!com.soft.sakd.common.dto.ItCatoryDto {id: 2, name: react}
         - !!com.soft.sakd.common.dto.ItCatoryDto {id: 3, name: antd}
         - !!com.soft.sakd.common.dto.ItCatoryDto {id: 4, name: k8s}
-        msg: null
-        params: null
+        msg: ''
+        params: {}
         status: true
         totalCount: 0
-    resultClazz: com.soft.sakd.common.search.bean.SearchResult
+    resultClazz: com.soft.sakd.common.search.bean.Result
   virtualParams:
     description: null
     params: {}

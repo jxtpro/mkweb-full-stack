@@ -15,7 +15,8 @@
 - 前端使用antd-design-pro进行项目构建
 - 数据库使用读写分离 docker Atlas mysql GTID 主从复制 读写分离.见：[https://github.com/95zz/docker-mysql-cluster](https://github.com/95zz/docker-mysql-cluster)
 - 计划使用docker nfs nginx 实现静态资源存储及下载
-## 功能展示
+
+## web功能展示
 图1
 ![1:1](https://3jxq.com/public/upload/1011ad48ce62c9b1d340880f9fcdb811.png)
 图2
@@ -30,10 +31,34 @@
 ![6:6](https://3jxq.com/public/upload/578eb82cd41994c3eb25b1ccc02a3548.png)
 图7
 ![7:7](https://3jxq.com/public/upload/d7ac183287ef6de576c9909a6b8a5933.png)
+
+## 小程序展示
+图1
+![1:1](https://3jxq.com/public/upload/e0769cc9e661c455475cab5a4135eca8.png)
+图2
+![2:2](https://3jxq.com/public/upload/9bd46d8a1ed5b5970309130e7c86744a.png)
+图3
+![3:3](https://3jxq.com/public/upload/3d6c9f4df76fecfafd3a7c33e747ea64.png)
+
 ## 特性
 - 国际化支持英文
 - 权限/富文本等
-- docker + atlas + mysql  
+- docker + atlas + mysql
+- 支持taro多端小程序  
+
+## 更新内容
+####后端
+- 文档内容字段编码变更为utf8mb4
+- 保持整洁代码，优化
+- 实现 权限认证
+
+#### 前端
+- 部署方式dockerfile调整
+- 富文本编辑器优化
+- 默认权限变更
+
+#### 新增多端小程序
+
 ## 支持环境依赖ant-design-pro
 
 现代浏览器及 IE11。

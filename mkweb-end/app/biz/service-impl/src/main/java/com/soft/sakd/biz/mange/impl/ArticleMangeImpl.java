@@ -5,8 +5,9 @@ import com.soft.sakd.biz.convert.impl.ArticleBizConvert;
 import com.soft.sakd.biz.mange.ArticleMange;
 import com.soft.sakd.biz.param.ArticleParam;
 import com.soft.sakd.common.dto.ArticleDto;
+import com.soft.sakd.common.exception.ServiceException;
 import com.soft.sakd.common.facade.ArticleService;
-import com.soft.sakd.common.search.bean.SearchResult;
+import com.soft.sakd.common.search.bean.Result;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,28 +24,18 @@ public class ArticleMangeImpl implements ArticleMange {
   @Autowired private ArticleService articleService;
 
   @Override
-  public SearchResult saveOrUpateArticle(ArticleParam param) {
+  public Result saveOrUpateArticle(ArticleParam param) {
+
     Assert.notNull(param, "参数不为空");
     Assert.notNull(param.getContent(), "文本参数不为空");
     Assert.notNull(param.getFileName(), "文档名不为空");
     Assert.notNull(param.getFileDesc(), "文档描述不为空");
 
-    SearchResult result = new SearchResult();
+    Result result = Result.makeSuccessResult();
     // 处理
-    ArticleBizConvert articleConvert = new ArticleBizConvert();
     try {
-      ArticleDto articleDto = articleConvert.paramToDto(param);
-      Long r = 0L;
-      if (null == param.getId() || param.getId() <= 0) {
-        r = articleService.insertArticle(articleDto);
-
-      } else {
-        r = articleService.updateArticle(articleDto);
-      }
-      if (r == 0) {
-        result.setStatus(false);
-      }
-    } catch (Exception e) {
+      saveOrUpdateArticle(param);
+    } catch (ServiceException e) {
       log.error("入参：" + JSON.toJSONString(param), e);
       result.setStatus(false);
       result.setMsg("数据新增失败");
@@ -52,36 +43,37 @@ public class ArticleMangeImpl implements ArticleMange {
     return result;
   }
 
+  private void saveOrUpdateArticle(ArticleParam param) throws ServiceException {
+    ArticleBizConvert articleConvert = new ArticleBizConvert();
+    ArticleDto articleDto = articleConvert.paramToDto(param);
+    if (null == param.getId() || param.getId() <= 0) {
+      articleService.insertArticle(articleDto);
+    } else {
+      articleService.updateArticle(articleDto);
+    }
+  }
+
   @Override
-  public SearchResult queryAll(int pageSize, int page) {
+  public Result queryAll(int pageSize, int page) {
     Assert.notNull(page, "pageSize不为空");
     Assert.notNull(pageSize, "page不为空");
-    SearchResult result = new SearchResult();
-    result.setList(articleService.queryAll(pageSize, page));
-    result.setTotalCount(articleService.countArticle());
-    return result;
+    return Result.makeSuccessResult(articleService.queryAll(pageSize, page), articleService.countArticle());
   }
 
   @Override
-  public SearchResult queryArticleById(Long id) {
-    Assert.notNull(id, "id不为空");
-    SearchResult result = new SearchResult();
+  public Result queryArticleById(Long articleId) {
+    Assert.notNull(articleId, "id不为空");
     ArticleBizConvert articleConvert = new ArticleBizConvert();
-    result.setData(articleConvert.dtoToVo(articleService.queryArticleById(id)));
-    return result;
+    return Result.makeSuccessResult(articleConvert.dtoToVo(articleService.queryArticleById(articleId)));
   }
 
   @Override
-  public SearchResult updateArticleLike(Long id) {
-    SearchResult result = new SearchResult();
-    result.setStatus(articleService.updateArticleLike(id) > 0); // > 0 表示成功
-    return result;
+  public Result updateArticleLike(Long articleId) {
+    return Result.makeSuccessResult(articleService.updateArticleLike(articleId) > 0); // articleService.updateArticleLike(articleId) > 0 表示成功
   }
 
   @Override
-  public SearchResult updateArticleBrowse(Long id) {
-    SearchResult result = new SearchResult();
-    result.setStatus(articleService.updateArticleBrowse(id) > 0); // > 0 表示成功
-    return result;
+  public Result updateArticleBrowse(Long articleId) {
+    return Result.makeStatusResult(articleService.updateArticleBrowse(articleId) > 0); // articleService.updateArticleBrowse(articleId) > 0 表示成功
   }
 }

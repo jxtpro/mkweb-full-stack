@@ -18,7 +18,7 @@ export function getAuthority(str?: string): string | string[] {
   }
 
   if (!authority) {
-    return ['admin'];
+    return ['user'];
   }
   return authority;
 }

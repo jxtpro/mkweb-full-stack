@@ -1,0 +1,26 @@
+
+index-wrap {
+    width: 100%;
+    min-height: 100vh;
+}
+.logo {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    width: 100%;
+    padding: 4px;
+}
+
+.logo_site_name{
+    margin-left: 8px;
+    font-weight: bold;
+    font-weight: 600;
+}
+.share_title{
+    font-weight: bold;
+}
+
+.article_content{
+    margin-top: 16px;
+    padding: 8px;
+}

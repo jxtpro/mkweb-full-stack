@@ -2,7 +2,7 @@ package com.soft.sakd.controller;
 
 import com.soft.sakd.biz.mange.ArticleMange;
 import com.soft.sakd.biz.param.ArticleParam;
-import com.soft.sakd.common.search.bean.SearchResult;
+import com.soft.sakd.common.search.bean.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,36 +20,37 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 @RequiredArgsConstructor
 public class ArticleController {
-  @Autowired public ArticleMange articleMange;
+
+  @Autowired
+  private ArticleMange articleMange;
 
   @RequestMapping("/saveOrUpateArticle")
   @ResponseBody
-  public SearchResult saveOrUpateArticle(@RequestBody ArticleParam param) {
+  public Result saveOrUpateArticle(@RequestBody ArticleParam param) {
     return articleMange.saveOrUpateArticle(param);
   }
 
   @RequestMapping("/queryArticleAll/{pageSize}/{page}")
   @ResponseBody
-  public SearchResult queryArticleAll(
-      @PathVariable(name = "pageSize") Integer pageSize, @PathVariable("page") Integer page) {
+  public Result queryArticleAll(@PathVariable(name = "pageSize") Integer pageSize, @PathVariable("page") Integer page) {
     return articleMange.queryAll(pageSize, page);
   }
 
   @RequestMapping("/queryArticle/{id}")
   @ResponseBody
-  public SearchResult queryArticle(@PathVariable(name = "id") Long id) {
-    return articleMange.queryArticleById(id);
+  public Result queryArticle(@PathVariable(name = "id") Long articleId) {
+    return articleMange.queryArticleById(articleId);
   }
 
   @RequestMapping("/updateArticleLike/{id}")
   @ResponseBody
-  public SearchResult updateArticleLike(@PathVariable(name = "id") Long id) {
-    return articleMange.updateArticleLike(id);
+  public Result updateArticleLike(@PathVariable(name = "id") Long articleId) {
+    return articleMange.updateArticleLike(articleId);
   }
 
   @RequestMapping("/updateArticleBrowse/{id}")
   @ResponseBody
-  public SearchResult updateArticleBrowse(@PathVariable(name = "id") Long id) {
-    return articleMange.updateArticleBrowse(id);
+  public Result updateArticleBrowse(@PathVariable(name = "id") Long articleId) {
+    return articleMange.updateArticleBrowse(articleId);
   }
 }

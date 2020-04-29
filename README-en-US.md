@@ -15,7 +15,8 @@ it stack: antd-design-pro+sofaboot+mybatis+nginx+tomcat+docker+k8s
 - The front end uses antd design pro to build the project
 - Database uses read-write separation docker atlas MySQL gtid master-slave copy read-write separation. See：[https://github.com/95zz/docker-mysql-cluster](https://github.com/95zz/docker-mysql-cluster)
 - It is planned to use docker NFS nginx to realize static resource storage and download
-## Function display
+
+## Web function display
 image 1
 ![1:1](https://3jxq.com/public/upload/1011ad48ce62c9b1d340880f9fcdb811.png)
 image 2
@@ -30,10 +31,35 @@ image 6
 ![6:6](https://3jxq.com/public/upload/578eb82cd41994c3eb25b1ccc02a3548.png)
 image 7
 ![7:7](https://3jxq.com/public/upload/d7ac183287ef6de576c9909a6b8a5933.png)
+
+## Min app display
+image1
+![1:1](https://3jxq.com/public/upload/e0769cc9e661c455475cab5a4135eca8.png)
+image2
+![2:2](https://3jxq.com/public/upload/9bd46d8a1ed5b5970309130e7c86744a.png)
+image3
+![3:3](https://3jxq.com/public/upload/3d6c9f4df76fecfafd3a7c33e747ea64.png)
+
 ## features
 - International support English
 - Authority / rich text, etc
 - docker + atlas + mysql  
+- Support for taro multi terminal applet
+
+##Update content
+
+####Back end
+- Document content field code changed to utf8mb4
+- Keep code clean, optimize
+- Implement authority authentication
+
+####Front end
+- Deployment mode dockerfile adjustment
+- Rich text editor optimization
+- Default permission change
+
+####Add multi terminal applet
+
 ## Support environment depends on Ant Design Pro
 
 Modern browser and ie11.
@@ -42,7 +68,7 @@ Modern browser and ie11.
 | --- | --- | --- | --- | --- |
 | IE11, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-##  更多
+##  more
 - [Use documents of antd design pro](http://pro.ant.design/docs/getting-started)
 - [Sofastack usage document](https://www.sofastack.tech/guides/sofastack-quick-start/)
 - [Spring boot usage document](https://spring.io/projects/spring-boot)

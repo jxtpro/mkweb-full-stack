@@ -1,5 +1,6 @@
 package com.soft.sakd.biz.mange;
 
+import com.soft.sakd.biz.param.UserParam;
 import com.soft.sakd.biz.vo.UserVo;
 
 /**
@@ -9,4 +10,6 @@ import com.soft.sakd.biz.vo.UserVo;
  */
 public interface LoginMange {
   public UserVo currentUser();
+  // 登录
+  public UserVo login(UserParam userParam);
 }

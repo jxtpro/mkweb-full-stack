@@ -40,13 +40,13 @@ public class ArticleSrvConvert implements SrvConvert<ArticleDto, Article> {
 
   public List<ArticleDto> toListDto(List<Article> articleList) {
     List<ArticleDto> articleDtoList = Lists.newArrayList();
-    articleList.forEach(
-        item -> {
-          articleDtoList.add(toDto(item));
-        });
+    articleList.forEach(article -> {
+      articleDtoList.add(toDto(article));
+    });
     return articleDtoList;
   }
 
+  //不再实现
   @Override
   public List<Article> toListDao(List<ArticleDto> attachmentsDtoList) {
     return null;

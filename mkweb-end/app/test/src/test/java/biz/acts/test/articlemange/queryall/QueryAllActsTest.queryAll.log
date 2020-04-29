@@ -4,5 +4,5 @@
 Preparing DB data:
 Start to invoke method:queryAll parameters:
 [0, 0]
-Invocation result: {"list":[],"status":true,"totalCount":1}
+Invocation result: {"list":[],"msg":"","params":{},"status":true,"totalCount":2}
 ====================Cleaning up DB data preparations=============================

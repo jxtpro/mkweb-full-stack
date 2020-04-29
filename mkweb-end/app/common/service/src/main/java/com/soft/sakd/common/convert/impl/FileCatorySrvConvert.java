@@ -30,20 +30,18 @@ public class FileCatorySrvConvert implements SrvConvert<FileCatoryDto, FileCator
 
   public List<FileCatoryDto> toListDto(List<FileCatory> fileCatoryList) {
     List<FileCatoryDto> fileCatoryDtoList = Lists.newArrayList();
-    fileCatoryList.forEach(
-        item -> {
-          fileCatoryDtoList.add(toDto(item));
-        });
+    fileCatoryList.forEach(fileCatory -> {
+      fileCatoryDtoList.add(toDto(fileCatory));
+    });
 
     return fileCatoryDtoList;
   }
 
   public List<FileCatory> toListDao(List<FileCatoryDto> fileCatoryDtoList) {
     List<FileCatory> fileCatoryList = Lists.newArrayList();
-    fileCatoryDtoList.forEach(
-        item -> {
-          fileCatoryList.add(toDao(item));
-        });
+    fileCatoryDtoList.forEach(fileCatoryDto -> {
+      fileCatoryList.add(toDao(fileCatoryDto));
+    });
     return fileCatoryList;
   }
 }

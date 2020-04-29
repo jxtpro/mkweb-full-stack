@@ -32,6 +32,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -52,86 +53,71 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Transactional
   @Override
-  public Long insertArticle(ArticleDto article) {
+  public ArticleDto insertArticle(ArticleDto articleDto) throws ServiceException {
+
+    Assert.notNull(articleDto, "文档不为空");
+    Assert.notNull(articleDto.getContent(), "文本参数不为空");
+    Assert.notNull(articleDto.getFileName(), "文档名不为空");
+    Assert.notNull(articleDto.getFileDesc(), "文档描述不为空");
+
     ArticleSrvConvert convert = new ArticleSrvConvert();
-    Article articleDao = convert.toDao(article);
-    int rd = articleMapper.insert(articleDao);
-    if (rd == 0) {
-      return 0L;
-    }
-    // 用户文档关系
+    Article article = convert.toDao(articleDto);
+
+    articleMapper.insert(article);
     UserArticle userArticle = new UserArticle();
-    userArticle.setUserId(article.getUserId());
-    userArticle.setArticleId(articleDao.getId());
+    userArticle.setUserId(articleDto.getUserId());
+    userArticle.setArticleId(article.getId());
+
     userArticleMapper.insert(userArticle);
+    insertBatchArticleFileCatoryRelated(articleDto);
+    insertBatchArticleItCatoryRelated(articleDto);
+    insertBatchArtcileAttachmentRelated(articleDto);
 
-    // 插入技术分类
-    for (ItCatoryDto itCatoryDto : article.getItCatory()) {
-      ArticleItCatory itCatory = new ArticleItCatory();
-      itCatory.setArticleId(articleDao.getId());
-      itCatory.setItCatoryId(itCatoryDto.getId());
-      articleItCatoryMapper.insert(itCatory);
-    }
-    // 插入文件分类
-    for (FileCatoryDto fileCatoryDto : article.getFileCatory()) {
-      ArticleFileCatory articleFileCatory = new ArticleFileCatory();
-      articleFileCatory.setArticleId(articleDao.getId());
-      articleFileCatory.setFileCatoryId(fileCatoryDto.getId());
-      articleFileCatoryMapper.insert(articleFileCatory);
-    }
-
-    // 文档附件
-    for (AttachmentsDto attachmentsDto : article.getAttachments()) {
-      ArticleAttachments articleAttachments = new ArticleAttachments();
-      articleAttachments.setAttachmentId(attachmentsDto.getId());
-      articleAttachments.setArticleId(articleDao.getId());
-      articleAttachmentsMapper.insert(articleAttachments);
-    }
-    return articleDao.getId();
+    return convert.toDto(article);
   }
 
   @Override
   public List<ArticleDto> queryAll(int pageSize, int page) {
+    return convertArticleRelated(articleMapper.queryAll(pageSize, page));
+  }
+
+  /**
+   * 处理文档关系
+   *
+   * @param articleList
+   */
+  private List<ArticleDto> convertArticleRelated(List<Article> articleList) {
     List<ArticleDto> articleDtoList = Lists.newArrayList();
-    // 分页查询所有文章
-    List<Article> articleList = articleMapper.queryAll(pageSize, page);
-    if (!CollectionUtils.isEmpty(articleList)) {
-      SrvConvert itCatoryConvert = new ItCatorySrvConvert();
-      SrvConvert attachmentsSrvConvert = new AttachmentsSrvConvert();
-      ArticleSrvConvert articleConvert = new ArticleSrvConvert();
-      FileCatorySrvConvert fileCatoryConvert = new FileCatorySrvConvert();
-      for (Article item : articleList) {
-        ArticleDto articleDto = articleConvert.toDto(item);
-        // 文章下所有的文档分类
-        articleDto.getFileCatory().addAll(fileCatoryConvert.toListDto(getFileCatory(item)));
-        // 文章下所有的技术分类信息
-        articleDto.getItCatory().addAll(itCatoryConvert.toListDto(getItCatory(item)));
-        // 文章下所有附件
-        articleDto.getItCatory().addAll(attachmentsSrvConvert.toListDto(getAttachments(item)));
-        articleDtoList.add(articleDto);
-      }
+    if (CollectionUtils.isEmpty(articleList)) {
+      return articleDtoList;
+    }
+    SrvConvert itCatoryConvert = new ItCatorySrvConvert();
+    SrvConvert attachmentsSrvConvert = new AttachmentsSrvConvert();
+    ArticleSrvConvert articleConvert = new ArticleSrvConvert();
+    FileCatorySrvConvert fileCatoryConvert = new FileCatorySrvConvert();
+    for (Article article : articleList) {
+      ArticleDto articleDto = articleConvert.toDto(article);
+      articleDto.getFileCatory().addAll(fileCatoryConvert.toListDto(findFileCatoryByArticleId(article.getId())));
+      articleDto.getItCatory().addAll(itCatoryConvert.toListDto(findItCatoryByArticleId(article.getId())));
+      articleDto.getAttachments().addAll(attachmentsSrvConvert.toListDto(findAttachmentsByArticleId(article.getId())));
+      articleDtoList.add(articleDto);
     }
     return articleDtoList;
   }
 
-  private List<Attachments> getAttachments(Article item) {
-    // 查询每篇文章下的所有附件
-    List<ArticleAttachments> articleAttachmentsList =
-        articleAttachmentsMapper.queryByArticleId(item.getId());
+  private List<Attachments> findAttachmentsByArticleId(Long articleId) {
+    List<ArticleAttachments> articleAttachmentsList = articleAttachmentsMapper.queryByArticleId(articleId);
     List<Attachments> attachmentsList = Lists.newArrayList();
     if (!CollectionUtils.isEmpty(articleAttachmentsList)) {
       for (ArticleAttachments attachmentsItem : articleAttachmentsList) {
-        attachmentsList.add(
-            attachmentsMapper.selectByPrimaryKey(attachmentsItem.getAttachmentId()));
+        attachmentsList.add(attachmentsMapper.selectByPrimaryKey(attachmentsItem.getAttachmentId()));
       }
     }
     return attachmentsList;
   }
 
-  private List<ItCatory> getItCatory(Article item) {
-    // 查询每篇文章下的所有技术归类
-    List<ArticleItCatory> articleItCatoryList =
-        articleItCatoryMapper.queryByArticleId(item.getId());
+  private List<ItCatory> findItCatoryByArticleId(Long articleId) {
+    List<ArticleItCatory> articleItCatoryList = articleItCatoryMapper.queryByArticleId(articleId);
     List<ItCatory> itCatoryList = Lists.newArrayList();
     if (!CollectionUtils.isEmpty(articleItCatoryList)) {
       for (ArticleItCatory articleItCatoryItem : articleItCatoryList) {
@@ -141,15 +127,12 @@ public class ArticleServiceImpl implements ArticleService {
     return itCatoryList;
   }
 
-  private List<FileCatory> getFileCatory(Article item) {
-    // 查询每篇文章下的所有文档归类
-    List<ArticleFileCatory> articleFileCatoryList =
-        articleFileCatoryMapper.queryByArticleId(item.getId());
+  private List<FileCatory> findFileCatoryByArticleId(Long articleId) {
+    List<ArticleFileCatory> articleFileCatoryList = articleFileCatoryMapper.queryByArticleId(articleId);
     List<FileCatory> fileCatoryList = Lists.newArrayList();
     if (!CollectionUtils.isEmpty(articleFileCatoryList)) {
       for (ArticleFileCatory articleItCatoryItem : articleFileCatoryList) {
-        fileCatoryList.add(
-            fileCatoryMapper.selectByPrimaryKey(articleItCatoryItem.getFileCatoryId()));
+        fileCatoryList.add(fileCatoryMapper.selectByPrimaryKey(articleItCatoryItem.getFileCatoryId()));
       }
     }
     return fileCatoryList;
@@ -161,88 +144,114 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public ArticleDto queryArticleById(Long id) {
+  public ArticleDto queryArticleById(Long articleId) {
+
+    Assert.notNull(articleId, "文档ID，不为空");
+
     ArticleSrvConvert articleConvert = new ArticleSrvConvert();
     FileCatorySrvConvert fileCatoryConvert = new FileCatorySrvConvert();
     ItCatorySrvConvert itCatoryConvert = new ItCatorySrvConvert();
     AttachmentsSrvConvert attachmentsSrvConvert = new AttachmentsSrvConvert();
-    Article article = articleMapper.selectByPrimaryKey(id);
+
+    Article article = articleMapper.selectByPrimaryKey(articleId);
+
     ArticleDto articleDto = articleConvert.toDto(article);
-    // 文档文件分类
-    articleDto.setFileCatory(fileCatoryConvert.toListDto(getFileCatory(article)));
-    // 文档it分类
-    articleDto.setItCatory(itCatoryConvert.toListDto(getItCatory(article)));
-    // 文档附件
-    articleDto.setAttachments(attachmentsSrvConvert.toListDto(getAttachments(article)));
+    articleDto.setFileCatory(fileCatoryConvert.toListDto(findFileCatoryByArticleId(articleId)));
+    articleDto.setItCatory(itCatoryConvert.toListDto(findItCatoryByArticleId(articleId)));
+    articleDto.setAttachments(attachmentsSrvConvert.toListDto(findAttachmentsByArticleId(articleId)));
     return articleDto;
   }
 
+  /**
+   * 更新成功返回 1L, 失败返回 0L
+   *
+   * @param articleDto
+   * @return
+   * @throws ServiceException
+   */
   @Transactional
   @Override
-  public Long updateArticle(ArticleDto articleDto) throws ServiceException {
+  public void updateArticle(ArticleDto articleDto) throws ServiceException {
+    Assert.notNull(articleDto, "更新的文档信息，不为空");
+    Assert.notNull(articleDto.getId(), "更新的文档ID，不为空");
 
-    if (null == articleDto.getId()) {
-      throw new ServiceException("更新文章时，ID不为空");
+    Article article = articleMapper.selectByPrimaryKey(articleDto.getId());
+    // 是否有这个文档
+    if (article == null) {
+      throw new ServiceException("");
     }
 
     ArticleSrvConvert articleConvert = new ArticleSrvConvert();
-
     articleItCatoryMapper.deleteAllByArtileId(articleDto.getId());
     articleFileCatoryMapper.deleteAllByArtileId(articleDto.getId());
     articleAttachmentsMapper.deleteAllByArtileId(articleDto.getId());
 
-    List<ArticleFileCatory> articleFileCatoryList = Lists.newArrayList();
-    if (!CollectionUtils.isEmpty(articleDto.getFileCatory())) {
-      for (FileCatoryDto item : articleDto.getFileCatory()) {
-        ArticleFileCatory articleFileCatory = new ArticleFileCatory();
-        articleFileCatory.setFileCatoryId(item.getId());
-        articleFileCatory.setArticleId(articleDto.getId());
-        articleFileCatoryList.add(articleFileCatory);
-      }
-      // 维护 文档归类 关系
-      articleFileCatoryMapper.insertBatch(articleFileCatoryList);
-    }
+    insertBatchArticleFileCatoryRelated(articleDto);
+    insertBatchArticleItCatoryRelated(articleDto);
+    insertBatchArtcileAttachmentRelated(articleDto);
 
-    List<ArticleItCatory> articleItCatoryList = Lists.newArrayList();
-    if (!CollectionUtils.isEmpty(articleDto.getItCatory())) {
-      for (ItCatoryDto item : articleDto.getItCatory()) {
-        ArticleItCatory articleItCatory = new ArticleItCatory();
-        articleItCatory.setItCatoryId(item.getId());
-        articleItCatory.setArticleId(articleDto.getId());
-        articleItCatoryList.add(articleItCatory);
-      }
-      // 维护 技术归类 关系
-      articleItCatoryMapper.insertBatch(articleItCatoryList);
-    }
+    articleMapper.updateByPrimaryKey(articleConvert.toDao(articleDto));
+  }
 
-    List<ArticleAttachments> articleAttachmentsList = Lists.newArrayList();
+  private void insertBatchArtcileAttachmentRelated(ArticleDto articleDto) {
     if (!CollectionUtils.isEmpty(articleDto.getAttachments())) {
+      List<ArticleAttachments> articleAttachmentsList = Lists.newArrayList();
       for (AttachmentsDto item : articleDto.getAttachments()) {
         ArticleAttachments articleAttachments = new ArticleAttachments();
         articleAttachments.setAttachmentId(item.getId());
         articleAttachments.setArticleId(articleDto.getId());
         articleAttachmentsList.add(articleAttachments);
       }
-      // 维护 文档附件
       articleAttachmentsMapper.insertBatch(articleAttachmentsList);
     }
-    articleMapper.updateByPrimaryKey(articleConvert.toDao(articleDto));
-    return 1L;
+  }
+
+  private void insertBatchArticleItCatoryRelated(ArticleDto articleDto) {
+    if (!CollectionUtils.isEmpty(articleDto.getItCatory())) {
+      List<ArticleItCatory> articleItCatoryList = Lists.newArrayList();
+      for (ItCatoryDto item : articleDto.getItCatory()) {
+        ArticleItCatory articleItCatory = new ArticleItCatory();
+        articleItCatory.setItCatoryId(item.getId());
+        articleItCatory.setArticleId(articleDto.getId());
+        articleItCatoryList.add(articleItCatory);
+      }
+      articleItCatoryMapper.insertBatch(articleItCatoryList);
+    }
+  }
+
+  private void insertBatchArticleFileCatoryRelated(ArticleDto articleDto) {
+    if (!CollectionUtils.isEmpty(articleDto.getFileCatory())) {
+      List<ArticleFileCatory> articleFileCatoryList = Lists.newArrayList();
+      for (FileCatoryDto item : articleDto.getFileCatory()) {
+        ArticleFileCatory articleFileCatory = new ArticleFileCatory();
+        articleFileCatory.setFileCatoryId(item.getId());
+        articleFileCatory.setArticleId(articleDto.getId());
+        articleFileCatoryList.add(articleFileCatory);
+      }
+      articleFileCatoryMapper.insertBatch(articleFileCatoryList);
+    }
   }
 
   @Override
-  public int updateArticleLike(Long id) {
-    Article article = articleMapper.selectByPrimaryKey(id);
+  public int updateArticleLike(Long articleId) {
+
+    Assert.notNull(articleId, "文档ID，不为空");
+
+    Article article = articleMapper.selectByPrimaryKey(articleId);
+    // 是否有这个文档
     if (article == null) {
       return 0;
     }
+
     article.setLikeCount((null == article.getLikeCount() ? 0 : article.getLikeCount()) + 1);
     return articleMapper.updateArticleLike(article);
   }
 
   @Override
-  public int updateArticleBrowse(Long id) {
-    Article article = articleMapper.selectByPrimaryKey(id);
+  public int updateArticleBrowse(Long articleId) {
+    Assert.notNull(articleId, "文档ID，不为空");
+    Article article = articleMapper.selectByPrimaryKey(articleId);
+    // 是否有这个文档
     if (article == null) {
       return 0;
     }

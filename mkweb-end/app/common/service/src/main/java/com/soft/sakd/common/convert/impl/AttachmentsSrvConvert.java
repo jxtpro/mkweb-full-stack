@@ -40,19 +40,17 @@ public class AttachmentsSrvConvert implements SrvConvert<AttachmentsDto, Attachm
 
   public List<AttachmentsDto> toListDto(List<Attachments> attachmentsList) {
     List<AttachmentsDto> attachmentsDtoList = Lists.newArrayList();
-    attachmentsList.forEach(
-        item -> {
-          attachmentsDtoList.add(toDto(item));
-        });
+    attachmentsList.forEach(attachments -> {
+      attachmentsDtoList.add(toDto(attachments));
+    });
     return attachmentsDtoList;
   }
 
   public List<Attachments> toListDao(List<AttachmentsDto> attachmentsDtoList) {
     List<Attachments> attachmentsList = Lists.newArrayList();
-    attachmentsDtoList.forEach(
-        item -> {
-          attachmentsList.add(toDao(item));
-        });
+    attachmentsDtoList.forEach(attachmentsDto -> {
+      attachmentsList.add(toDao(attachmentsDto));
+    });
     return attachmentsList;
   }
 }

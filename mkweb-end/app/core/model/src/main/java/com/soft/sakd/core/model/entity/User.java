@@ -9,6 +9,8 @@ public class User implements Serializable {
 
     private String password;
 
+    private String auth;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -35,6 +37,14 @@ public class User implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth == null ? null : auth.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -43,7 +53,7 @@ public class User implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", password=").append(password);
+        sb.append(", auth=").append(auth);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

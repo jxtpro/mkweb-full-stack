@@ -48,12 +48,12 @@ image3
 
 ##Update content
 
-####Back end
+#### Back end
 - Document content field code changed to utf8mb4
 - Keep code clean, optimize
 - Implement authority authentication
 
-####Front end
+#### Front end
 - Deployment mode dockerfile adjustment
 - Rich text editor optimization
 - Default permission change

@@ -70,6 +70,8 @@ Modern browser and ie11.
 
 ##  more
 - [Use documents of antd design pro](http://pro.ant.design/docs/getting-started)
+- [taro usage document](https://taro.jd.com)
+- [taro ui usage document](https://taro-ui.jd.com/#/)
 - [Sofastack usage document](https://www.sofastack.tech/guides/sofastack-quick-start/)
 - [Spring boot usage document](https://spring.io/projects/spring-boot)
 - [Mybatis using documents](https://mybatis.org/mybatis-3/zh/index.html)

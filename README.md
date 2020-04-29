@@ -69,6 +69,8 @@
 
 ##  更多
 - [antd-design-pro使用文档](http://pro.ant.design/docs/getting-started)
+- [taro使用文档](https://taro.jd.com)
+- [taro ui使用文档](https://taro-ui.jd.com/#/)
 - [sofastack使用文档](https://www.sofastack.tech/guides/sofastack-quick-start/)
 - [springboot使用文档](https://spring.io/projects/spring-boot)
 - [ACTS（AntCoreTest）使用文档](https://www.bookstack.cn/read/SOFAActs/Home.md)

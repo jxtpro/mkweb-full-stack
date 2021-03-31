@@ -21,7 +21,7 @@
     <junit-jupiter-engine>5.1.0</junit-jupiter-engine>
     <mockito-all>1.10.19</mockito-all>
     <commons-lang3.version>3.7</commons-lang3.version>
-    <guava.version>28.1-jre</guava.version>
+    <guava.version>29.0-jre</guava.version>
     <tracer.version>3.0.11</tracer.version>
   </properties>
 

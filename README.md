@@ -6,8 +6,8 @@
 技术栈: antd-design-pro+sofaboot+mybatis+nginx+tomcat+docker+k8s
 </div>
 
-- 预览：http://mk.3jxq.com
-- 首页：http://mk.3jxq.com/welcome
+- 预览：暂停
+- 首页：暂停
 
 ## 全栈技术
 - 后端使用maven进行项目构建

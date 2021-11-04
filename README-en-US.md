@@ -6,8 +6,8 @@
 it stack: antd-design-pro+sofaboot+mybatis+nginx+tomcat+docker+k8s
 </div>
 
-- preview：http://mk.3jxq.com
-- home：http://mk.3jxq.com/welcome
+- preview：stop
+- home：stop
 
 ## full-stack
 - Backend uses Maven for project construction
